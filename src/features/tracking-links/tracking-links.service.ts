@@ -1,23 +1,21 @@
 import { TrackingLink } from './tracking-links.types';
 
 export default abstract class TrackingLinksService {
-  private static data: TrackingLink[] = [];
+  private static timeout: 30_000;
+  private static trackingLinks: TrackingLink[] = [];
 
   static getAll() {
-    return this.data;
+    return this.trackingLinks;
   }
 
   static getOne(id: TrackingLink['id']) {
-    return this.data.find((it) => it.id === id);
+    return this.trackingLinks.find((trackingLink) => trackingLink.id === id);
   }
 
   static create(body: Omit<TrackingLink, 'id'>) {
-    const trackingLink: TrackingLink = {
-      ...body,
-      id: this.data.length,
-    };
+    const trackingLink: TrackingLink = { ...body, id: this.trackingLinks.length };
 
-    this.data = [...this.data, trackingLink];
+    this.trackingLinks = [...this.trackingLinks, trackingLink];
 
     this.scheduleGeneratingUrl(trackingLink);
 
@@ -27,6 +25,6 @@ export default abstract class TrackingLinksService {
   private static scheduleGeneratingUrl(trackingLink: TrackingLink) {
     setTimeout(() => {
       trackingLink.url = `http://example.com/${trackingLink.id}`;
-    }, 5000);
+    }, this.timeout);
   }
 }
