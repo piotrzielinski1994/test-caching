@@ -1,10 +1,10 @@
 import { TrackingLink } from './tracking-links.types';
 
 export default abstract class TrackingLinksService {
-  private static timeout: 30_000;
   private static trackingLinks: TrackingLink[] = [];
 
   static getAll() {
+    console.log('@@@ this.trackingLinks | ', this.trackingLinks);
     return this.trackingLinks;
   }
 
@@ -25,6 +25,6 @@ export default abstract class TrackingLinksService {
   private static scheduleGeneratingUrl(trackingLink: TrackingLink) {
     setTimeout(() => {
       trackingLink.url = `http://example.com/${trackingLink.id}`;
-    }, this.timeout);
+    }, 30000);
   }
 }
