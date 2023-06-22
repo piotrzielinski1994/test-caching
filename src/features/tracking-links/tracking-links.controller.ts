@@ -4,11 +4,11 @@ import TrackingLinksService from './tracking-links.service';
 export default abstract class TrackingLinksController {
   static getAll(request: Request) {
     const trackingLinks = TrackingLinksService.getAll();
-    return NextResponse.json({ data: trackingLinks });
+    return NextResponse.json(trackingLinks);
   }
 
   static create(request: Request) {
     const trackingLink = TrackingLinksService.create({ name: 'Asd' });
-    return NextResponse.json({ data: trackingLink });
+    return NextResponse.json(trackingLink);
   }
 }

@@ -1,17 +1,16 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import RootProvider from '@/components/providers/root.provider';
+import '@/assets/global-styles.scss';
 
 export const metadata = {
   title: 'Test caching',
 };
 
-const queryClient = new QueryClient();
-
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <QueryClientProvider client={queryClient}>
+    <RootProvider>
       <html lang="en">
         <body>{children}</body>
       </html>
-    </QueryClientProvider>
+    </RootProvider>
   );
 }

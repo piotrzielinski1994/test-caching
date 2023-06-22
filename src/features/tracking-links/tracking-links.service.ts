@@ -4,7 +4,6 @@ export default abstract class TrackingLinksService {
   private static trackingLinks: TrackingLink[] = [];
 
   static getAll() {
-    console.log('@@@ this.trackingLinks | ', this.trackingLinks);
     return this.trackingLinks;
   }
 

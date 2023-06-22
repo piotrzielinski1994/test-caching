@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { TrackingLink } from '../tracking-links.types';
 
-export default function useAllTrackingLinks() {
+export default function useGetAllTrackingLinks() {
   return useQuery({
     queryKey: ['tracking-links'],
     queryFn: function (): Promise<TrackingLink[]> {
