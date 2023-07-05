@@ -1,7 +1,9 @@
 import { TrackingLink } from './tracking-links.types';
 
-export default abstract class TrackingLinksService {
-  private static trackingLinks: TrackingLink[] = [
+const trackingLinks = (): TrackingLink[] => {
+  if (process.data) return process.data;
+
+  process.data = [
     {
       id: 0,
       name: 'Tracking Link 1',
@@ -14,18 +16,22 @@ export default abstract class TrackingLinksService {
     },
   ];
 
+  return process.data;
+};
+
+export default abstract class TrackingLinksService {
   static getAll() {
-    return this.trackingLinks;
+    return trackingLinks();
   }
 
   static getOne(id: TrackingLink['id']) {
-    return this.trackingLinks.find((trackingLink) => trackingLink.id === id);
+    return trackingLinks().find((trackingLink) => trackingLink.id === id);
   }
 
   static create(body: Omit<TrackingLink, 'id'>) {
-    const trackingLink: TrackingLink = { ...body, id: this.trackingLinks.length };
+    const trackingLink: TrackingLink = { ...body, id: trackingLinks().length };
 
-    this.trackingLinks = [...this.trackingLinks, trackingLink];
+    trackingLinks().push(trackingLink);
 
     this.scheduleGeneratingUrl(trackingLink);
 

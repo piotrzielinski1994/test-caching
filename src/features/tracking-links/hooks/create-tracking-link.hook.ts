@@ -7,13 +7,14 @@ export default function useCreateTrackingLink() {
     mutationFn: function (name: TrackingLink['name']): Promise<TrackingLink> {
       return fetch('/api/tracking-links', {
         method: 'post',
-        body: JSON.stringify({
-          name,
-        }),
+        body: JSON.stringify({ name }),
       }).then((res) => res.json());
     },
     onSuccess: function (trackingLink: TrackingLink) {
       queryClient.setQueryData(['tracking-links', { id: trackingLink.id }], trackingLink);
+      queryClient.setQueryData<TrackingLink[]>(['tracking-links'], (currentTrackingLinks = []) => {
+        return [...currentTrackingLinks, trackingLink];
+      });
     },
   });
 }
