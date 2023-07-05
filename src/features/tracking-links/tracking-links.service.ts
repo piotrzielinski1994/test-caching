@@ -6,13 +6,13 @@ const trackingLinks = (): TrackingLink[] => {
   process.data = [
     {
       id: 0,
-      name: 'Tracking Link 1',
-      url: 'http://example.com/1',
+      name: 'Tracking Link 0',
+      url: 'http://example.com/0',
     },
     {
       id: 1,
-      name: 'Tracking Link 2',
-      url: 'http://example.com/2',
+      name: 'Tracking Link 1',
+      url: 'http://example.com/1',
     },
   ];
 
