@@ -1,6 +1,6 @@
 'use client';
 
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef } from 'react';
 import useCreateTrackingLink from '@/features/tracking-links/hooks/create-tracking-link.hook';
 import useGetTrackingLink from '@/features/tracking-links/hooks/get-tracking-link.hook';
 
@@ -8,8 +8,9 @@ export default function CreateTrackingLinkForm() {
   const nameInput = useRef<HTMLInputElement>(null);
   const createTrackingLink = useCreateTrackingLink();
   const trackingLink = useGetTrackingLink({
-    isEnabled: false,
+    id: createTrackingLink.data?.id,
   });
+  const isPolling = Boolean(trackingLink.data && !trackingLink.data.url);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -18,10 +19,14 @@ export default function CreateTrackingLinkForm() {
     createTrackingLink.mutate(nameInput.current.value);
   }
 
+  if (isPolling) {
+    return 'Polling...';
+  }
+
   return (
     <form onSubmit={onSubmit}>
       <input ref={nameInput} />
-      <button>Create</button>
+      <button>{trackingLink.isFetching ? 'Loading...' : 'Create'}</button>
     </form>
   );
 }

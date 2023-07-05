@@ -1,11 +1,22 @@
+nav {
+  ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    gap: 10px;
+  }
+}
+
 table {
   border: 1px solid black;
 }
 
 th {
+  padding: 5px 10px;
   border: 1px solid black;
 }
 
 td {
+  padding: 5px 10px;
   border: 1px solid black;
 }

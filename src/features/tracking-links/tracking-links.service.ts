@@ -1,7 +1,18 @@
 import { TrackingLink } from './tracking-links.types';
 
 export default abstract class TrackingLinksService {
-  private static trackingLinks: TrackingLink[] = [];
+  private static trackingLinks: TrackingLink[] = [
+    {
+      id: 0,
+      name: 'Tracking Link 1',
+      url: 'http://example.com/1',
+    },
+    {
+      id: 1,
+      name: 'Tracking Link 2',
+      url: 'http://example.com/2',
+    },
+  ];
 
   static getAll() {
     return this.trackingLinks;
@@ -24,6 +35,6 @@ export default abstract class TrackingLinksService {
   private static scheduleGeneratingUrl(trackingLink: TrackingLink) {
     setTimeout(() => {
       trackingLink.url = `http://example.com/${trackingLink.id}`;
-    }, 30000);
+    }, 5000);
   }
 }
